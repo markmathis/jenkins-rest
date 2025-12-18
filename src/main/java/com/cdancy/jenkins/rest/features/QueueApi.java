@@ -62,6 +62,19 @@ public interface QueueApi {
     @Named("queue:item")
     @Path("/item/{queueId}/api/json")
     @GET
+    QueueItem queueItem(@PathParam("queueId") long queueId);
+
+    /**
+     * Get a specific queue item.
+     *
+     * Queue items are builds that have been scheduled to run, but are waiting for a slot.
+     * You can poll the queueItem that corresponds to a build to detect whether the build is still pending or is executing.
+     * @param queueId The queue id value as returned by the JobsApi build or buildWithParameters methods.
+     * @return The queue item corresponding to the queue id.
+     */
+    @Named("queue:item")
+    @Path("/item/{queueId}/api/json")
+    @GET
     QueueItem queueItem(@PathParam("queueId") long queueId, @QueryParam("depth") long depth);
 
     /**
